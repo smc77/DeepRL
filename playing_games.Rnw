@@ -1,0 +1,1499 @@
+\documentclass{beamer}
+%\documentclass[notes]{beamer}
+
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{Sweave}
+\usepackage{subfigure}
+%\usepackage[utf8]{inputenc}
+%\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{float} 
+\usepackage{attrib} 
+\usepackage{xcolor} 
+%\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{transparent}
+\usetikzlibrary{shapes,backgrounds}
+\usetikzlibrary{automata}
+\usetikzlibrary{arrows,positioning}
+\usetikzlibrary{trees}
+\usepackage{tikz-qtree}
+%\usetikzlibrary{bayesnet}
+
+%\usepackage{signalflowdiagram}
+
+\usepackage{listings}
+\lstset{
+language=Python,
+basicstyle=\ttfamily,
+columns=fullflexible
+}
+
+\usepackage{schemabloc}
+\usepackage[framemethod=tikz]{mdframed}
+
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+
+\definecolor{mydarkblue}{HTML}{0066CC}
+\definecolor{mydarkred}{HTML}{990000}
+\definecolor{mydarkgreen}{HTML}{006600}
+\definecolor{myblue}{HTML}{336699}
+
+\tikzstyle{normalnode}=[draw,%
+                          rectangle,%
+                          shade,%
+                          minimum size  = 1.0cm,%
+                          node distance = 1.3cm]
+ \tikzstyle{normalnode2}=[draw,%
+                          rectangle,%
+                          shade,%
+                          minimum size  = 1.0cm,%
+                          node distance = 1.0cm]
+  \tikzstyle{normalnode3}=[draw,%
+                          rectangle,%
+                          shade,%
+                          minimum size  = 1.0cm,%
+                          node distance = 5.0cm]
+  \tikzstyle{normal}=[draw,fill=myblue,rectangle, minimum size=1.0cm,node
+  distance=2cm, text=white] 
+  \tikzstyle{start}=[draw,fill=green!70,rectangle, minimum size=1.0cm,node distance=1.3cm]                        
+  \tikzstyle{goal}=[draw,fill=red!70,rectangle, minimum size=1.0cm,node distance=1.3cm]
+  \tikzstyle{goal2}=[draw,fill=red!70,rectangle, minimum size=1.0cm,node distance=1.0cm]
+  \tikzstyle{agent}=[draw,fill=blue!70,circle,minimum size=0.6cm]
+  \tikzstyle{dummy}=[circle]
+\usetikzlibrary{automata,chains}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{intersections}
+
+\definecolor{myblue}{HTML}{336699}
+
+\setbeamertemplate{blocks}[rounded=true, shadow=true] 
+\setbeamercolor{block title}{bg=myblue,fg=white}
+\setbeamercolor{frametitle}{myblue}
+\setbeamercolor{title}{myblue}
+\usecolortheme[named=myblue]{structure}
+
+%% Add support for \subsubsectionpage
+%\def\subsubsectionname{\translate{Subsubsection}}
+%\def\insertsubsubsectionnumber{\arabic{subsubsection}}
+%\setbeamertemplate{section page}
+%{
+%  \begin{centering}
+%    \begin{beamercolorbox}[sep=4pt,center]{part title}
+%      \usebeamerfont{section title}\insertsection\par
+%    \end{beamercolorbox}
+%  \end{centering}
+%}
+%\setbeamertemplate{subsubsection page}
+%{
+%  \begin{centering}
+%    {\usebeamerfont{subsubsection name}\usebeamercolor[fg]{subsubsection
+%    name}\subsubsectionname~\insertsubsubsectionnumber} 
+%    \vskip1em\par
+%    \begin{beamercolorbox}[sep=4pt,center]{part title}
+%      \usebeamerfont{subsubsection title}\insertsubsubsection\par
+%    \end{beamercolorbox}
+%  \end{centering}
+%}
+%\def\subsubsectionpage{\usebeamertemplate*{subsubsection page}}
+%
+%\AtBeginSection{\frame{\sectionpage}}
+%\AtBeginSubsection{\frame{\subsectionpage}}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\title{The 10,000 Hours Rule} 
+\subtitle{Learning to Play Games with AI}
+\author{Shane Conway} 
+\institute{
+%\textit{smc77@columbia.edu, @statalgo} 
+}
+\date{\today} 
+
+\AtBeginSection[]{
+   \setbeamercolor{section in toc shaded}{use=structure,fg=structure.fg}
+   \setbeamercolor{section in toc}{fg=myblue}
+   \setbeamercolor{subsection in toc shaded}{fg=black}
+   \setbeamercolor{subsection in toc}{fg=myblue}
+  \frame<beamer>{%\begin{multicols}
+  \frametitle{Outline}
+  \setcounter{tocdepth}{2}  
+  \tableofcontents[currentsection,subsections]
+%\end{multicols} 
+ }
+}
+
+
+{
+  \usebackgroundtemplate{\includegraphics[width=1.0\paperwidth, height=1.0\paperheight]{figures/spaceinvaders.png}} %
+  \begin{frame}[plain]
+\vspace{15em}
+\begin{mdframed}[tikzsetting={draw=black,fill=white,fill opacity=0.7,
+               line width=4pt},backgroundcolor=none,leftmargin=0,
+               rightmargin=40,innertopmargin=4pt]
+{\huge The 10,000 Hours Rule}\\
+Learning Proficiency to Play Games with AI\\
+Shane M. Conway\\
+{\footnotesize \href{http://twitter.com/statalgo}{@statalgo}, \href{mailto: smc77@columbia.edu}{smc77@columbia.edu}}
+\end{mdframed}
+  \end{frame}
+}
+
+% \frame{\titlepage} 
+
+
+
+\frame{
+
+\begin{quote}
+"I think we should be very careful about artificial intelligence. If I had to guess at what our biggest existential threat is, it's probably that. So we need to be very careful.  I'm increasingly inclined to think that there should be some regulatory oversight, maybe at the national and international level, just to make sure that we don't do something very foolish." -Elon Musk
+\end{quote}
+
+\note{
+}
+
+%\pause
+
+% \begin{quote}
+% "The use of punishments and rewards can at best be a part of the teaching process. Roughly speaking, if the teacher has no other means of communicating to the pupil, the amount of information which can reach him does not exceed \textbf{the total number of rewards and punishments applied}." \href{http://orium.pw/paper/turingai.pdf
+% }{(Turing (1950) "Computing Machinery and Intelligence")}
+% \end{quote}
+% 
+% \note{
+% Alan Turing famously considered the ideas of reinforcement learning when developing his ideas around the measures of AI (the Turing Test).
+% \begin{itemize}
+% \item "the total number of rewards and punishments applied": there is some function that accumulates knowledge of rewards and punishments, which is the value function in RL.
+% \end{itemize}
+% }
+
+}
+
+\frame{\frametitle{Outline}\tableofcontents} 
+
+% Resources:
+% http://users.isr.ist.utl.pt/~mtjspaan/readingGroup/slides04012007.pdf
+
+
+\section{Background} 
+
+{
+\usebackgroundtemplate{% width=\paperwidth,
+\parbox[c][\paperheight][c]{\paperwidth}{
+\begin{figure}[H]
+\begin{center}
+%   \tikz\node[opacity=0.2] {\includegraphics[height=\paperheight, right]{../images/cartoon_4.jpg}};
+\end{center}
+\end{figure}
+}
+}
+
+\frame{
+
+\begin{center}
+{\huge Learning to Learn by Playing Games}\\
+
+\vspace{12 mm}
+
+%{\Large Childs play}
+\end{center}
+
+}
+}
+
+
+\frame{\frametitle{Artificial Intelligence} 
+
+Artificial General Intelligence (AGI) has made significant progress in the last few years.
+
+\vspace{6 mm}
+
+I want to review some of the latest models:
+
+\begin{itemize}
+%  \item Introduce tensorflow, a deep learning library from Google.
+  \item Discuss tools from DeepMind and OpenAI.
+  \item Demonstrate models on games.
+\end{itemize}
+
+}
+
+
+
+\frame{\frametitle{Artificial Intelligence} 
+
+Progress in AI has been driven by different advances:
+
+\begin{enumerate}
+  \item Compute (the obvious one: Moore's Law, GPUs, ASICs),
+  \item Data (in a nice form, not just out there somewhere on the internet - e.g. ImageNet),
+  \item Algorithms (research and ideas, e.g. backprop, CNN, LSTM), and
+  \item Infrastructure (software under you - Linux, TCP/IP, Git, ROS, PR2, AWS, AMT, TensorFlow, etc.).
+\end{enumerate}
+
+
+\vspace{0.25in}
+
+\scriptsize{\textit{\href{http://karpathy.github.io/2016/05/31/rl/}{Source: @karpathy}}}
+% 
+
+}
+
+\frame{\frametitle{Tools} 
+
+This talk will highlight a few major tools:
+
+\begin{itemize}
+  \item OpenAI gym and universe
+  \item Google TensorFlow
+%  \item Keras
+\end{itemize}
+
+\vspace{6mm}
+
+I will also focus on a few specific models
+
+\begin{itemize}
+  \item DQN
+  \item A3C
+  \item NEC
+\end{itemize}
+
+}
+
+
+
+\frame{\frametitle{Game Play} 
+
+Why games?
+
+\vspace{6 mm}
+
+Playing games generally involves:
+
+\begin{itemize}
+  \item Very large state spaces.
+  \item A sequence of actions that leads to a reward.
+  \item Adversarial opponents.
+  \item Uncertainty in states.
+\end{itemize}
+
+}
+
+
+
+\section{History} 
+
+{
+\usebackgroundtemplate{% width=\paperwidth,
+\parbox[c][\paperheight][c]{\paperwidth}{
+\begin{figure}[H]
+\begin{center}
+%   \tikz\node[opacity=0.2] {\includegraphics[height=\paperheight, right]{../images/cartoon_4.jpg}};
+\end{center}
+\end{figure}
+}
+}
+
+\frame{
+
+\begin{center}
+{\huge Learning to Learn by Playing Games}\\
+
+\vspace{12 mm}
+
+% {\Large Childs play}
+% \end{center}
+
+}
+}
+
+
+\frame{\frametitle{Claude Shannon}
+
+In 1950, Claude Shannon published "Programming a Computer for Playing Chess", introducing the idea of "minimax"
+
+\begin{center}
+    \begin{tikzpicture}
+        \node[anchor=south west,inner sep=0, opacity=0.9] (image) at (0,0) {\includegraphics[width=0.8\textheight]{figures/shannon_mouse.jpg}};
+        \node[align=center,blue] at (image.center) {};
+    \end{tikzpicture}
+\end{center}
+
+% \begin{figure}[!h]
+% \begin{center}
+% \includegraphics[width=0.5\textheight]{figures/shannon_mouse.jpg}
+% \end{center}
+% \end{figure}
+% 
+% Claud Shannon was one of the early AI pioneers.  In 1950, Claude Shannon published a groundbreaking paper entitled "Programming a Computer for Playing Chess", which first put forth the idea of a function for evaluating the efficacy of a particular move and a "minimax" algorithm which took advantage of this evaluation function by taking into account the efficacy of future moves that would be made available by any particular move.
+
+}
+
+\frame{\frametitle{Arthur Samuel} 
+
+Arthur Samuel (1956) created a program that beat a self-proclaimed expert at Checkers.
+
+\begin{center}
+    \begin{tikzpicture}
+        \node[anchor=south west,inner sep=0, opacity=0.9] (image) at (0,0) {\includegraphics[width=1\textheight]{figures/samuel_checkers.jpg}};
+        \node[align=center,blue] at (image.center) {
+};
+    \end{tikzpicture}
+\end{center}
+
+%"Wait! Hold the presses! \\A computer defeated a master checkers player!"
+
+% 
+% \begin{figure}[!h]
+% \begin{center}
+% \includegraphics[width=0.5\textheight]{figures/samuel_checkers.jpg}
+% \end{center}
+% \end{figure}
+% 
+% "Wait! Hold the presses! A computer defeated a master checkers player! This was a major news story. Computers could solve the game of checkers. Mankind's intellectual superiority was being challenged by electronic monsters. To the technology-illiterate public of 1962, this was a major event. It was a precursor to machines doing other intelligent things better than man. How long could it possibly be before computers would be smarter than man? After all, computers have only been around for a few years, and already rapid progress was being made in the fledgling computer field of artificial intelligence. Paranoia."
+% %https://www-03.ibm.com/ibm/history/ibm100/us/en/icons/ibm700series/impacts/
+
+}
+
+
+
+\frame{\frametitle{Chess}
+
+DeepBlue achieved "superhuman" ability in May 1997.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.95\textwidth]{figures/chess-shannon-type-a.png}
+\end{center}
+\end{figure}
+
+
+\vspace{0.15in}
+
+\scriptsize{\textit{\href{http://stanford.edu/~cpiech/cs221/apps/deepBlue.html}{Article about DeepBlue}, \href{http://arrogant.stanford.edu/ggp/homepage/notes.php}{General Game Playing course at Stanford}}}
+
+
+}
+
+
+\frame{\frametitle{Backgammon} 
+
+{\small
+Tesauro (1995) "Temporal Difference Learning and TD-Gammon" may be the most famous success story for RL, using a combination of the TD($\lambda$) algorithm and nonlinear function approximation using a multilayer neural network trained by backpropagating TD errors.
+}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{figures/td-gammon.png}
+\end{center}
+\end{figure}
+
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Go}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.98\textwidth]{figures/alphago.jpg}
+\end{center}
+\end{figure}
+
+
+\emph{The number of potential legal board positions in go is greater than the number of atoms in the universe.}
+%https://www.theatlantic.com/technology/archive/2016/03/the-invisible-opponent/475611/
+
+\end{frame}
+
+\frame{\frametitle{Go} 
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.95\textwidth]{figures/go_states.png}
+\end{center}
+\end{figure}
+
+\begin{center}
+{\small
+\href{http://videolectures.net/icml09_sutton_itdrl/}{From Sutton (2009) "Deconstructing Reinforcement Learning" ICML}
+}
+\end{center}
+
+}
+
+\frame{\frametitle{Go} 
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.95\textwidth]{figures/go_samples.png}
+\end{center}
+\end{figure}
+
+\begin{center}
+{\small
+\href{http://videolectures.net/icml09_sutton_fgdm/}{From Sutton (2009) "Fast Gradient-Descent Methods for Temporal-Difference Learning with Linear Function Approximation" ICML}
+}
+\end{center}
+
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}
+% 
+% Self driving cars
+% 
+% http://janhuenermann.com/projects/learning-to-drive
+% 
+% \end{frame}
+
+\begin{frame}
+\frametitle{Go}
+
+AlphaGo combined supervised learning and reinforcement learning, and made massive improvement through self-play.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{figures/alphago_network.png}
+\end{center}
+\end{figure}
+
+%http://deeplearningskysthelimit.blogspot.com/2016/04/part-2-alphago-under-magnifying-glass.html
+%https://www.tastehit.com/blog/google-deepmind-alphago-how-it-works/
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\frame{\frametitle{Poker} 
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.7\textheight]{figures/poker.png}
+\end{center}
+\end{figure}
+
+}
+
+
+\frame{\frametitle{Dota 2} 
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{figures/dota2_openAI.jpg}
+\end{center}
+\end{figure}
+
+}
+
+
+
+\section{Benchmarks} 
+
+{
+\usebackgroundtemplate{% width=\paperwidth,
+\parbox[c][\paperheight][c]{\paperwidth}{
+\begin{figure}[H]
+\begin{center}
+%   \tikz\node[opacity=0.2] {\includegraphics[height=\paperheight, right]{../images/cartoon_4.jpg}};
+\end{center}
+\end{figure}
+}
+}
+
+\frame{
+
+\begin{center}
+{\huge My Network has more layers than yours...}\\
+
+\vspace{12 mm}
+
+{\Large Benchmarks and progress}
+\end{center}
+
+}
+}
+
+
+\frame{\frametitle{MNIST} 
+
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.98\textwidth]{figures/mnist.png}
+\end{center}
+\end{figure}
+
+}
+
+\frame{\frametitle{ImageNet} 
+
+One of the classic examples of AI benchmarks is ImageNet.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.98\textwidth]{figures/cnntsne.jpeg}
+\end{center}
+\end{figure}
+
+Others: http://deeplearning.net/datasets/
+http://image-net.org/challenges/LSVRC/2017/
+
+}
+
+
+\frame{\frametitle{OpenAI gym} 
+
+For control problems, there is a growing universe of environments for benchmarking:
+
+\begin{itemize}
+  \item Classic control
+  \item Board games
+  \item Atari 2600
+  \item MuJoCo
+  \item Minecraft
+  \item Soccer
+  \item Doom
+\end{itemize}
+
+Roboschool is intended to provide multi-agent environments.
+
+}
+
+
+
+\section{Reinforcement Learning} 
+
+{
+\usebackgroundtemplate{% width=\paperwidth,
+\parbox[c][\paperheight][c]{\paperwidth}{
+\begin{figure}[H]
+\begin{center}
+%   \tikz\node[opacity=0.2] {\includegraphics[height=\paperheight, right]{../images/cartoon_4.jpg}};
+\end{center}
+\end{figure}
+}
+}
+
+\frame{
+
+\begin{center}
+{\huge Try that again}\\
+
+\vspace{12 mm}
+
+{\Large ...an again}
+\end{center}
+
+}
+}
+
+
+\frame{\frametitle{Reinforcement Learning} 
+
+In a single agent version, we consider two major components: the \emph{agent} and the \emph{environment}.  
+
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+  thick,main
+  node/.style={circle,fill=myblue,draw,text=white,font=\sffamily\Large\bfseries}]
+ %nodes
+ \node[] (center);
+ % We make a dummy figure to make everything look nice.
+ \node[top=of center, fill=myblue, text=white] (t) {Agent};
+ \node[below=of center, fill=myblue, text=white] (g) {Environment};
+
+  \path[every node/.style={font=\sffamily\small}]
+  (t) edge[bend left=65] node[auto] {Action} (g)
+  (g) edge[bend left=65] node[auto] {Reward, State} (t);
+\end{tikzpicture}
+\end{center}
+% \caption[Generalized Policy Iteration]
+%  {The reinforcement learning cycle, from agent to environment, back to agent.}
+  \label{fig:reinforcement_cycle}
+\end{figure}
+
+The agent takes actions, and receives updates in the form of state/reward pairs.
+
+\note{
+The environment is the real world, which gives the agent some form of feedback.  We can think of the environment as being $y$ and the agent as having $f(x)$, an estimate of the true $y$.
+}
+
+}
+
+
+\frame{\frametitle{RL Model} 
+
+An MDP tranisitons from state $s$ to state $s'$
+following an action $a$, and receiving a reward $r$ as a result of each
+transition:
+
+\begin{equation}
+s_0 \xrightarrow[\qquad r_0]{a_0 \qquad} s_1 \xrightarrow[\qquad r_1]{a_1 \qquad} s_2 \ldots
+\end{equation}
+
+\begin{beamerboxesrounded}[shadow=true]{MDP Components}
+\begin{itemize}
+  \item $S$ is a set of states
+  \item $A$ is set of actions 
+  \item $R(s)$ is a reward function
+\end{itemize}
+\end{beamerboxesrounded}
+
+In addition we define:
+
+\begin{itemize}
+  \item $T(s'|s, a)$ is a probability transition function
+  \item $\gamma$ as a discount factor (from 0 to 1)
+\end{itemize}
+
+}
+
+% \frame{\frametitle{Dynamic Decision Networks} 
+% 
+% Bayesian networks are a popular method for characterizing probabilistic models.  These can be extended as a Dynamic Decision Network (DDN) with the addition of decision (action) and utility (value) nodes. 
+% 
+% \vspace{5mm}
+% 
+% \begin{center}
+% \begin{tikzpicture}[sibling distance=5cm, level 2/.style={sibling distance =2cm}]
+% 
+% \node[draw] at (3,-5) 
+% {
+% \begin{tabular}{cl}
+% \tikz\node[circle,draw] {s}; & state \\
+% \tikz\node[square,draw] {a}; & decision \\
+% \tikz\node[diamond,draw] {r}; & utility
+% \end{tabular}
+% };
+% \end{tikzpicture}
+% \end{center}
+% 
+% }
+
+
+\frame{\frametitle{Markov Models} 
+
+We can extend the markov process to study other models with the same the property.
+
+% From http://books.google.com/books?id=2qk-5rpAB0AC&dq=hmm+pomdp+do+we+have+control+over+state&source=gbs_navlinks_s
+% And: https://www.cs.cmu.edu/~ggordon/780-fall07/lectures/POMDP_lecture.pdf
+% http://webdocs.cs.ualberta.ca/~greiner/C-366/SLIDES/17b-POMDP.pdf
+
+\begin{center}
+<<results=tex, echo=FALSE>>=
+library(xtable)
+df <- data.frame(models=c("Markov Models", "Markov Chains", "MDP", "HMM", "POMDP"), states=c("Are States Observable?", "Yes", "Yes", "No", "No"), control=c("Control Over Transitions?", "No", "Yes", "No", "Yes"))
+colnames(df) <- as.character(t(df[1,]))
+df <- df[2:nrow(df),]
+print(xtable(df), include.colnames=TRUE, include.rownames=FALSE, size="\\small")
+#print((df), include.colnames=TRUE, include.rownames=FALSE, size="\\small")
+@
+\end{center}
+
+}
+
+\frame{\frametitle{Markov Processes} 
+
+Markov Processes are very elementary in time series analysis.  
+
+\begin{figure}[H]
+
+\begin{center}
+\begin{tikzpicture}[]
+% states
+\node[state] (s1) at (0,2) {$s_1$};
+\node[state] (s2) at (2,2) {$s_2$}
+    edge [<-] (s1);
+\node[state] (s3) at (4,2) {$s_3$}
+    edge [<-] (s2);
+\node[state] (s4) at (6,2) {$s_4$}
+    edge [<-] (s3);
+\end{tikzpicture}
+\end{center}
+
+\end{figure}
+
+\begin{beamerboxesrounded}[shadow=true]{Definition}
+\begin{equation}
+P(s_{t+1} | s_t, ..., s_1) = P(s_{t+1} | s_t)
+\end{equation}
+
+\begin{itemize}
+\item $s_t$ is the state of the markov process at time $t$.
+\end{itemize}
+\end{beamerboxesrounded}
+
+
+}
+
+\frame{\frametitle{Markov Decision Process (MDP)} 
+
+A Markov Decision Process (MDP) adds some further structure to the problem.  
+
+% (Related to Stochastic Shortest Path problem: http://www.mit.edu/people/dimitrib/Stochasticsp.pdf)
+
+
+\begin{figure}[H]
+
+\begin{center}
+\begin{tikzpicture}[]
+% states
+\node[state] (s1) at (0,2) {$s_1$};
+\node[state] (s2) at (2,2) {$s_2$}
+    edge [<-] (s1);
+\node[state] (s3) at (4,2) {$s_3$}
+    edge [<-] (s2);
+\node[state] (s4) at (6,2) {$s_4$}
+    edge [<-] (s3);
+% actions
+\node[rectangle] (a1) at (0,0) [draw,thick,minimum width=1cm,minimum height=1cm] {$a_1$}
+    edge [->] (s2);
+\node[rectangle] (a2) at (2,0) [draw,thick,minimum width=1cm,minimum height=1cm] {$a_2$}
+    edge [->] (s3);
+\node[rectangle] (a3) at (4,0) [draw,thick,minimum width=1cm,minimum height=1cm] {$a_3$}
+    edge [->] (s4);
+% rewards
+\node[diamond] (r1) at (2,4) [draw,thick,minimum width=1cm,minimum height=1cm] {$r_1$}
+    edge [<-] (s1);
+\node[diamond] (r2) at (4,4) [draw,thick,minimum width=1cm,minimum height=1cm] {$r_2$}
+    edge [<-] (s2);
+\node[diamond] (r3) at (6,4) [draw,thick,minimum width=1cm,minimum height=1cm] {$r_3$}
+    edge [<-] (s3);
+
+\draw (a1) edge [->] (r1);
+\draw (a2) edge [->] (r2);
+\draw (a3) edge [->] (r3);
+
+\end{tikzpicture}
+\end{center}
+
+\end{figure}
+
+}
+
+
+\frame{\frametitle{Hidden Markov Model (HMM)} 
+
+Hidden Markov Models (HMM) provide a mechanism for modeling a hidden (i.e. unobserved) stochastic process by observing a related observed process.  HMM have grown increasingly popular following their success in NLP.
+
+\begin{figure}[H]
+
+\begin{center}
+\begin{tikzpicture}[]
+% states
+\node[state] (s1) at (0,2) {$s_1$};
+\node[state] (s2) at (2,2) {$s_2$}
+    edge [<-] (s1);
+\node[state] (s3) at (4,2) {$s_3$}
+    edge [<-] (s2);
+\node[state] (s4) at (6,2) {$s_4$}
+    edge [<-] (s3);
+% observations
+\node[state] (y1) at (0,0) {$o_1$}
+    edge [->] (s1);
+\node[state] (y2) at (2,0) {$o_2$}
+    edge [->] (s2);
+\node[state] (y3) at (4,0) {$o_3$}
+    edge [->] (s3);
+\node[state] (y4) at (6,0) {$o_4$}
+    edge [->] (s4);
+\end{tikzpicture}
+\end{center}
+
+\end{figure}
+
+}
+
+\frame{\frametitle{Partially Observable Markov Decision Processes (POMDP)} 
+
+A Partially Observable Markov Decision Processes (POMDP) extends the MDP by assuming partial observability of the states, where the current state is a probability model (a \emph{belief state}).  
+
+
+\begin{figure}[H]
+
+\begin{center}
+\begin{tikzpicture}[]
+% states
+\node[state] (s1) at (0,3) {$s_1$};
+\node[state] (s2) at (2,3) {$s_2$}
+    edge [<-] (s1);
+\node[state] (s3) at (4,3) {$s_3$}
+    edge [<-] (s2);
+\node[state] (s4) at (6,3) {$s_4$}
+    edge [<-] (s3);
+%
+\node[state] (o1) at (0,1.5) {$o_1$}
+    edge [->] (s1);
+\node[state] (o2) at (2,1.5) {$o_2$}
+    edge [->] (s2);
+\node[state] (o3) at (4,1.5) {$o_3$}
+    edge [->] (s3);
+\node[state] (o4) at (6,1.5) {$o_4$}
+    edge [->] (s4);
+% actions
+\node[rectangle] (a1) at (0,0) [draw,thick,minimum width=1cm,minimum height=1cm] {$a_1$}
+    edge [->] (s2);
+\node[rectangle] (a2) at (2,0) [draw,thick,minimum width=1cm,minimum height=1cm] {$a_2$}
+    edge [->] (s3);
+\node[rectangle] (a3) at (4,0) [draw,thick,minimum width=1cm,minimum height=1cm] {$a_3$}
+    edge [->] (s4);
+% rewards
+\node[diamond] (r1) at (2,4) [draw,thick,minimum width=1cm,minimum height=1cm] {$r_1$}
+    edge [<-] (s1);
+\node[diamond] (r2) at (4,4) [draw,thick,minimum width=1cm,minimum height=1cm] {$r_2$}
+    edge [<-] (s2);
+\node[diamond] (r3) at (6,4) [draw,thick,minimum width=1cm,minimum height=1cm] {$r_3$}
+    edge [<-] (s3);
+
+\draw (a1) edge [->] (r1);
+\draw (a2) edge [->] (r2);
+\draw (a3) edge [->] (r3);
+
+\end{tikzpicture}
+\end{center}
+
+\end{figure}
+
+}
+
+% 
+
+\frame{\frametitle{Value function} 
+
+We define a \emph{value function} to maximize the expected return:
+
+\begin{equation*}
+V^{\pi}(s) = E[R(s_0) + \gamma R(s_1) + \gamma^2 R(s_2) + \cdots | s_0 = s, \pi]
+\end{equation*}
+
+We can rewrite this as a recurrence relation, which is known as the \textbf{Bellman
+Equation}:
+
+\begin{equation*}
+V^{\pi}(s) = R(s) + \gamma \sum_{s' \in S} T(s') V^{\pi}(s')
+\end{equation*}
+
+\begin{equation*}
+Q^{\pi}(s, a) = R(s) + \gamma \sum_{s' \in S} T(s') max_a Q^{\pi}(s', a')
+\end{equation*}
+
+Lastly, for policy gradient we can be interested in the advantage function:
+
+\begin{equation*}
+A^{\pi}(s, a) = Q^{\pi}(s, a) - V^{\pi}(s)
+\end{equation*}
+
+}
+
+
+
+\frame{\frametitle{Policy} 
+
+The objective is to find a policy $\pi$ that maps actions to states, and will maximize the rewards over time:
+
+{\huge
+\begin{center}
+\begin{equation*}
+\pi(s) \rightarrow a
+\end{equation*}
+\end{center}
+}
+
+\vspace{0.25in}
+
+The policy can be a table or a model.
+
+% \begin{beamerboxesrounded}[shadow=true]{Policy}
+% \end{beamerboxesrounded}
+
+}
+
+
+\frame{\frametitle{Function Approximation} 
+
+We can use functions to approximate different components of the RL model (value function, policy): generalize from seen states to unseen states.
+
+\begin{itemize}
+  \item Value based: learn the value function, with implicit policy (e.g. $\epsilon$-greedy)
+  \item Policy based: no value function, learn policy
+  \item Actor-Critic: learn value function, learn policy
+\end{itemize}
+
+}
+
+
+\frame{\frametitle{Policy Search} 
+
+In \emph{policy search}, we are trying many different policies.  We don't need to know the value of each state/action pair.
+
+\begin{itemize}
+  \item Non-gradient based methods (e.g. hill climbing, simplex, genetic algorithms)
+  \item Gradient based methods (e.g. gradient descent, quasi-newton)
+\end{itemize}
+
+Policy gradient theorem:
+
+\begin{equation*}
+\nabla_{\theta} J(\theta) = E_{\pi_{\theta}} [\nabla_{\theta} log \pi_{\theta} (s, a) Q^{\pi \theta} (s, a) ]
+\end{equation*}
+
+}
+
+
+
+\section{DeepRL} 
+
+{
+\usebackgroundtemplate{% width=\paperwidth,
+\parbox[c][\paperheight][c]{\paperwidth}{
+\begin{figure}[H]
+\begin{center}
+%   \tikz\node[opacity=0.2] {\includegraphics[height=\paperheight, right]{../images/cartoon_4.jpg}};
+\end{center}
+\end{figure}
+}
+}
+
+\frame{
+
+\begin{center}
+{\huge I have a rough sense for where I am?}\\
+
+\vspace{12 mm}
+
+{\Large What to do when the state space is too large...}
+\end{center}
+
+}
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+
+\emph{Artificial neural networks} (ANN) are learning models that were directly inspired by the structure of biological neural networks.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.55\textwidth]{figures/simple_perceptron.png}
+\end{center}
+\caption{A perceptron takes inputs, applies weights, and determines the output based on an activation function (such as a sigmoid).}
+\end{figure}
+
+\vspace{0.25in}
+
+\scriptsize{\textit{\href{https://medium.com/@jaschaephraim/elementary-neural-networks-with-tensorflow-c2593ad3d60b#.hidaox4qi}{Image source: @jaschaephraim}}}
+
+%http://cs231n.github.io/neural-networks-1/
+%Source: https://medium.com/@jaschaephraim/elementary-neural-networks-with-tensorflow-c2593ad3d60b#.8nuva6y4z
+%http://sebastianraschka.com/Articles/2015_singlelayer_neurons.html
+%https://stevenmiller888.github.io/mind-how-to-build-a-neural-network/
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{figures/neural_net2.jpeg}
+\end{center}
+\caption{Multiple layers can be connected together.}
+\end{figure}
+
+%http://cs231n.github.io/convolutional-networks/
+%https://beckmw.wordpress.com/2013/11/14/visualizing-neural-networks-in-r-update/
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Deep Learning}
+
+\href{https://en.wikipedia.org/wiki/Deep_learning}{\emph{Deep Learning}} employs multiple levels (hierarchy) of representations, often in the form of a large and wide neural network.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.95\textwidth]{figures/revo_in_depth.png}
+\end{center}
+\end{figure}
+
+%https://medium.com/@Lidinwise/the-revolution-of-depth-facf174924f5#.66gerjcg5
+%http://torch.ch/blog/2016/02/04/resnets.html
+%http://playground.tensorflow.org/#activation=tanh&regularization=L1&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0.01&noise=20&networkShape=5,2,2&seed=0.62288&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=regression&initZero=false&hideText=false
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \frame{\frametitle{Convolution Networks} 
+% 
+% Deep neural networks typically have an architucture of major components.
+% 
+% \begin{figure}[!h]
+% \begin{center}
+% \includegraphics[width=0.95\textwidth]{figures/deep_networks.png}
+% \end{center}
+% \end{figure}
+% 
+% }
+% 
+
+\begin{frame}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{figures/lenet5.jpg}
+\caption{LeNET (1998), Yann LeCun et. al.}
+\par\vfill
+\includegraphics[width=0.8\textwidth]{figures/alexnet_small.png}
+\caption{AlexNET (2012), Alex Krizhevsky, Ilya Sutskever and Geoff Hinton}
+\end{center}
+%\caption{Titanic data from Kaggle competition shows a pattern predicting who survived: more likely to be female, wealthy, and/or young.  Can we model this?}
+\end{figure}
+
+\tiny{\emph{Source: \href{http://cs231n.github.io/convolutional-networks/}{Andrej Karpathy}}}
+
+%https://arxiv.org/pdf/1605.07678.pdf
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{TensorFlow}
+
+There are a large number of open source deep learning libraries, but TensorFlow is one of the most popular (Theano, Torch, Caffe).  Can be coded directly or using a higher level API (Keras).
+
+\vspace{6mm}
+
+Provides many functions to deal with network architecture.  
+
+\begin{lstlisting}
+convolution_layer = tf.contrib.layers.convolution2d()
+\end{lstlisting}
+
+\end{frame}
+
+
+
+\frame{\frametitle{DQN} 
+
+DeepMind first introduced Deep Q-Networks (DQN).  DQN introduced several important innovations: deep convolution network, experience replay, and a second target network.  Has since been extended in many ways including Double DQN and Dueling DQN.   
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{figures/dqn_paper.png}
+\end{center}
+\end{figure}
+
+
+%\vspace{0.15in}
+
+%\scriptsize{\textit{\href{http://neuro.cs.ut.ee/demystifying-deep-reinforcement-learning/}{Source code from DeepMind}}}
+ 
+
+}
+
+
+\frame{\frametitle{DQN Network} 
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.95\textwidth]{figures/dqn_network.png}
+\end{center}
+\end{figure}
+
+\vspace{0.15in}
+
+\scriptsize{\textit{\href{https://sites.google.com/a/deepmind.com/dqn/}{Source code from DeepMind}}}
+
+%https://deepmind.com/research/open-source/open-source-code/ 
+
+}
+
+
+\frame{\frametitle{A3C} 
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.95\textwidth]{figures/a3c_paper.png}
+\end{center}
+\end{figure}
+
+}
+
+\frame{\frametitle{Advantage Actor Critic} 
+
+The policy gradient has many different forms:
+
+\vspace{0.15in}
+
+\begin{itemize}
+  \item REINFORCE: $\nabla_{\theta} J(\theta) = E_{\pi_{\theta}} [\nabla_{\theta} log \pi_{\theta} (s, a) v_t]$
+  \item Q Actor-Critic: $\nabla_{\theta} J(\theta) = E_{\pi_{\theta}} [\nabla_{\theta} log \pi_{\theta} (s, a) Q^w (s, a)]$
+  \item Advantage Actor-Critic: $\nabla_{\theta} J(\theta) = E_{\pi_{\theta}} [\nabla_{\theta} log \pi_{\theta} (s, a) A^w (s, a)]$
+\end{itemize}
+
+\vspace{0.25in}
+
+A3C uses an Advantage Actor-Critic model, using neural networks to learn both the policy and the advantage function $A^w (s, a)]$.
+
+}
+
+
+\frame{\frametitle{A3C Algorithm} 
+
+The A3C algorithm parallelizes single episodes, and then aggregates learning to a global network.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.65\textwidth]{figures/a3c_architecture.png}
+\end{center}
+\end{figure}
+
+%https://en.wikipedia.org/wiki/Pong
+
+}
+
+
+
+
+% \frame{\frametitle{A3C} 
+% 
+% In A3C, we use two convolution layers, 
+% 
+% }
+
+
+
+\frame{\frametitle{NEC} 
+
+Neural Episodic Control (NEC) addresses the problem that RL algorithms requires a very large number of interactions to learn, by trying to learn from single examples.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{figures/nec_paper.png}
+\end{center}
+\end{figure}
+
+
+\vspace{0.15in}
+
+\scriptsize{\textit{Example code: \href{https://github.com/mjacar/pytorch-nec}{[1]}, \href{https://github.com/EndingCredits/Neural-Episodic-Control}{[2]}}}
+
+}
+
+
+
+% 
+% \section{Pole Balancing} 
+% 
+% {
+% \usebackgroundtemplate{% width=\paperwidth,
+% \parbox[c][\paperheight][c]{\paperwidth}{
+% \begin{figure}[H]
+% \begin{center}
+% %   \tikz\node[opacity=0.2] {\includegraphics[height=\paperheight, right]{../images/cartoon_4.jpg}};
+% \end{center}
+% \end{figure}
+% }
+% }
+% 
+% \frame{
+% 
+% \begin{center}
+% {\huge Fighting gravity}\\
+% 
+% \vspace{12 mm}
+% 
+% {\Large }
+% \end{center}
+% 
+% }
+% }
+% 
+% 
+% \frame{\frametitle{Pole Balancing} 
+% 
+% One classic reinforcement learning problem is known as the cart-pole problem.
+% 
+% }
+% 
+
+
+
+\section{OpenAI} 
+
+\frame{\frametitle{OpenAI} 
+
+OpenAI has released a number of tools:
+
+\begin{itemize}
+  \item gym
+  \item universe
+  \item roboschool
+  \item baselines
+\end{itemize}
+
+\vspace{0.15in}
+
+See \href{https://openai.com/systems/}{https://openai.com/systems/} for complete details.
+
+}
+
+
+% \frame{\frametitle{gym} 
+% 
+% \emph{gym}
+% 
+% }
+
+\begin{frame}[fragile]
+\frametitle{gym} 
+
+\begin{lstlisting}
+import gym
+from gym import wrappers
+
+env = gym.make("FrozenLake-v0")
+env = wrappers.Monitor(env, "/tmp/gym-results")
+observation = env.reset()
+for _ in range(1000):
+    env.render()
+    action = env.action_space.sample()  # your agent here (this takes random actions)
+    observation, reward, done, info = env.step(action)
+    if done:
+        env.reset()
+
+env.close()
+gym.upload("/tmp/gym-results", api_key="YOUR_API_KEY")
+\end{lstlisting}
+
+\end{frame}
+
+\frame{\frametitle{Baselines} 
+
+OpenAI recent started a new project called Baselines, which provides good implementations of state-of-the-art (SOTA) agents.
+
+\vspace{0.1in}
+
+\begin{itemize}
+  \item Source code: \href{https://github.com/openai/baselines}{https://github.com/openai/baselines}
+  \item DQN discussion: \href{https://blog.openai.com/openai-baselines-dqn/}{https://blog.openai.com/openai-baselines-dqn/} 
+  \item A2C and ACKTR discussion: \href{https://blog.openai.com/baselines-acktr-a2c/}{https://blog.openai.com/baselines-acktr-a2c/}
+\end{itemize}
+
+}
+
+
+\frame{\frametitle{Baselines} 
+
+\href{https://github.com/openai/baselines-results/blob/master/acktr_ppo_acer_a2c_atari.ipynb}{Baselines provides examples} of comparing the performance of different agents across many environments:
+
+\vspace{0.15in}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.85\textwidth]{figures/baselines.png}
+\end{center}
+\end{figure}
+
+
+
+[Example]
+
+}
+
+
+
+\frame{\frametitle{Evolutionary Strategies} 
+
+There are alternatives to solving these problems, including Evolutionary Strategies.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{figures/es_paper.png}
+\end{center}
+\end{figure}
+
+
+\vspace{0.15in}
+
+\scriptsize{\textit{Example code: \href{https://github.com/alirezamika/bipedal-es}{[1]}, \href{https://github.com/openai/evolution-strategies-starter}{[2]}}}
+
+}
+
+
+
+\section{Pong} 
+
+{
+\usebackgroundtemplate{% width=\paperwidth,
+\parbox[c][\paperheight][c]{\paperwidth}{
+\begin{figure}[H]
+\begin{center}
+%   \tikz\node[opacity=0.2] {\includegraphics[height=\paperheight, right]{../images/cartoon_4.jpg}};
+\end{center}
+\end{figure}
+}
+}
+
+\frame{
+
+\begin{center}
+{\huge Pixels in...winning out!}\\
+
+\vspace{12 mm}
+
+{\Large }
+\end{center}
+
+}
+}
+
+
+\frame{\frametitle{Pong} 
+
+Pong (1972) was the first commercially successful arcade game.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{figures/pong.png}
+\end{center}
+\end{figure}
+
+%https://en.wikipedia.org/wiki/Pong
+
+}
+
+
+\frame{\frametitle{RL Structure} 
+
+The game structure is fairly simple:
+
+\begin{itemize}
+  \item We get a \emph{reward} of +1 for every game win and -1 for every loss.  An episode is defined as when the game ends (first to 21 points).
+  \item The \emph{actions} are limited to up and down.
+  \item The \emph{state} (and features) characterizes the entire board, including our paddle position.
+  \item Before we take an action, we reduce the state space by elminating unimportant aspects of the pixels.
+\end{itemize}
+
+
+}
+
+
+\frame{\frametitle{Policy network} 
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{figures/pong_policy.png}
+\end{center}
+\end{figure}
+
+\vspace{0.25in}
+
+\scriptsize{\textit{\href{http://karpathy.github.io/2016/05/31/rl/}{Source: @karpathy}}}
+
+}
+
+
+\frame{\frametitle{Network Weights} 
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.95\textwidth]{figures/pong_weights.png}
+\end{center}
+\end{figure}
+
+\vspace{0.25in}
+
+\scriptsize{\textit{\href{http://karpathy.github.io/2016/05/31/rl/}{Source: @karpathy}}}
+
+}
+
+
+\section{Game Over} 
+
+
+\frame{\frametitle{Resources: Teams}
+
+Reinforcement learning research is being conducted by a combination of academic and industrial groups, all of which support open source/publishing.
+
+\vspace{0.1in}
+
+\begin{itemize}
+  \item University of Alberta: \href{http://spaces.facsci.ualberta.ca/rlai/}{http://spaces.facsci.ualberta.ca/rlai/} 
+  \item OpenAI: \href{https://openai.com/}{https://openai.com/}
+  \item DeepMind: \href{https://deepmind.com/}{https://deepmind.com/}
+%  \item Vector Institute: \href{http://vectorinstitute.ai/}{http://vectorinstitute.ai/}
+\end{itemize}
+
+}
+
+
+\frame{\frametitle{Resources: Courses/Tutorials}
+
+A number of recent courses and tutorials provide more detail on topics that we discussed:
+
+\vspace{0.1in}
+
+\begin{itemize}
+  \item David Silver (UCL): \href{http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html}{"Reinforcement Learning"} 
+  \item Sergey Levine, John Schulman, Chelsea Finn (Berkeley): \href{http://rll.berkeley.edu/deeprlcoursesp17/}{"Deep Reinforcement Learning"} 
+  \item Katerina Fragkiadaki, Ruslan Satakhutdinov (CMU): \href{https://katefvision.github.io/}{"Deep Reinforcement Learning and Control"}
+\end{itemize}
+
+\vspace{0.1in}
+
+\begin{itemize}
+  \item David Silver: \href{http://icml.cc/2016/tutorials/deep_rl_tutorial.pdf}{Deep Reinforcement Learning tutorial at ICML 2016} 
+  \item John Shulman: \href{https://www.youtube.com/watch?v=PtAIh9KSnjo}{Deep Reinforcement Learning tutorial at the Deep Learning School 2016}
+\end{itemize}
+
+}
+
+
+\frame{\frametitle{Resources: Code}
+
+The OpenAI code is written in Python: \href{https://openai.com/systems/}{https://openai.com/systems/}
+
+\vspace{0.25in}
+
+There are also wrappers for Juila and R:
+
+\begin{itemize}
+  \item R: \href{https://cran.r-project.org/web/packages/gym/index.html}{https://cran.r-project.org/web/packages/gym/index.html}  
+  \item Julia: \href{https://github.com/JuliaML/OpenAIGym.jl}{https://github.com/JuliaML/OpenAIGym.jl}
+\end{itemize}
+
+%https://github.com/openai/universe-starter-agent
+
+}
+
+\frame{\frametitle{Resources: Reading}
+
+There are many great materials online.  Sutton/Barto wrote the classic text, which is now fully available:
+
+\vspace{0.1in}
+
+\begin{itemize}
+  \item \emph{Sutton/Barto \href{http://incompleteideas.net/sutton/book/bookdraft2017june.pdf}{"Reinforcement Learning: An Introduction"}}
+  \item Andrej Karpathy: \href{http://karpathy.github.io/2016/05/31/rl/}{Deep Reinforcement Learning: Pong from Pixels}
+  \item Arthur Juliani: \href{https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-8-asynchronous-actor-critic-agents-a3c-c88f72a5e9f2}{8-Part Series on "Reinforcement Learning with Tensorflow"}
+  \item Denny Britz: \href{http://www.wildml.com/2016/10/learning-reinforcement-learning/}{Learning Reinforcement Learning (with Code, Exercises and Solutions)} 
+\end{itemize}
+
+}
+
+
+\end{document}
+
