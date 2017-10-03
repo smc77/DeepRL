@@ -10,7 +10,9 @@ Sutton and Barto provided the definitive textbook, and the most recent version i
 
 ## Teams
 
-* Alberta: http://spaces.facsci.ualberta.ca/rlai/}{http://spaces.facsci.ualberta.ca/rlai/
+A large portion of new research is being produced by a handful of groups:
+
+* University of Alberta: http://spaces.facsci.ualberta.ca/rlai/
 * DeepMind: https://deepmind.com/
 * OpenAI: https://openai.com/
 
@@ -21,15 +23,19 @@ Sutton and Barto provided the definitive textbook, and the most recent version i
 * Sergey Levine, John Schulman, Chelsea Finn (Berkeley) "Deep Reinforcement Learning": http://rll.berkeley.edu/deeprlcoursesp17/ 
 * Katerina Fragkiadaki, Ruslan Satakhutdinov (CMU) "Deep Reinforcement Learning and Control": https://katefvision.github.io/
 
+
 ## Tutorials
 
 * David Silver, Deep Reinforcement Learning tutorial (ICML 2016): http://icml.cc/2016/tutorials/deep_rl_tutorial.pdf
 * John Shulman, Deep Reinforcement Learning tutorial (Deep Learning School 2016): https://www.youtube.com/watch?v=PtAIh9KSnjo
+* Pieter Abbeel, Deep Reinforcement Learning: https://simons.berkeley.edu/talks/pieter-abbeel-2017-3-28
 
 
 ## Blog Posts
 
-* Arthur Juliani, 8-Part Series on "Reinforcement Learning with Tensorflow": https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-8-asynchronous-actor-critic-agents-a3c-c88f72a5e9f2
+* Arthur Juliani, 8-Part Series on "Reinforcement Learning with Tensorflow": 
+** https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-8-asynchronous-actor-critic-agents-a3c-c88f72a5e9f2
+
 * Andrej Karpathy "Pong From Pixels" http://karpathy.github.io/2016/05/31/rl/
 
 
