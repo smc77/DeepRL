@@ -34,7 +34,16 @@ A large portion of new research is being produced by a handful of groups:
 ## Blog Posts
 
 * Arthur Juliani, 8-Part Series on "Reinforcement Learning with Tensorflow": 
-  * https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-8-asynchronous-actor-critic-agents-a3c-c88f72a5e9f2
+	* [Part 0 — Q-Learning Agents](https://medium.com/@awjuliani/simple-reinforcement-learning-with-tensorflow-part-0-q-learning-with-tables-and-neural-networks-d195264329d0)
+	* Part 1 — Two-Armed Bandit
+	* Part 1.5 — Contextual Bandits
+	* Part 2 — Policy-Based Agents
+	* Part 3 — Model-Based RL
+	* Part 4 — Deep Q-Networks and Beyond
+	* Part 5 — Visualizing an Agent’s Thoughts and Actions
+	* Part 6 — Partial Observability and Deep Recurrent Q-Networks
+	* Part 7 — Action-Selection Strategies for Exploration
+	* [Part 8 — Asynchronous Actor-Critic Agents (A3C)](https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-8-asynchronous-actor-critic-agents-a3c-c88f72a5e9f2)
 
 * Andrej Karpathy "Pong From Pixels" http://karpathy.github.io/2016/05/31/rl/
 
