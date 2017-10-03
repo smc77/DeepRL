@@ -56,26 +56,32 @@ Sutton and Barto provided the definitive textbook, and the most recent version i
 
 ## Source Code and Baselines
 
-* https://openai.com/systems/
 * https://deepmind.com/research/open-source/open-source-code/
 * Denny Britz, "Learning Reinforcement Learning" (with Code, Exercises and Solutions: http://www.wildml.com/2016/10/learning-reinforcement-learning/
 
+
 ## Models
+
+OpenAI's "baselines" provides some nice implementations of different state-of-the-art (SOTA) agent models:
 
 * https://github.com/openai/baselines
 * https://blog.openai.com/openai-baselines-dqn/
 * https://blog.openai.com/baselines-acktr-a2c/
 
 
-### Asynchronous Advantage Actor-Critic (A3C)
-
-
-
-### Deep Q-Networks (DQN)
+### Deep Q-Networks (DQN) (2013)
 
 * Source code from DeepMind: https://sites.google.com/a/deepmind.com/dqn/
 * https://github.com/devsisters/DQN-tensorflow
 * https://github.com/tmulc18/TensorFlow-FlappyBird
+
+
+
+### Asynchronous Advantage Actor-Critic (A3C) (2016)
+
+* Paper: Mnih et. al. (DeepMind/Montreal) "Asynchronous Methods for Deep Reinforcement Learning" (2016) https://arxiv.org/abs/1602.01783
+* A3C example from OpenAI: https://github.com/openai/universe-starter-agent
+
 
 
 ### Neural Episodic Control (2017)
@@ -85,21 +91,20 @@ Sutton and Barto provided the definitive textbook, and the most recent version i
 * https://github.com/EndingCredits/Neural-Episodic-Control
 
 
-## Other
-
-* CS231n: Convolutional Neural Networks for Visual Recognition: http://cs231n.github.io/
-
-
 ### Evolutionary Strategies
 
 * https://github.com/openai/evolution-strategies-starter
 * https://github.com/alirezamika/bipedal-es
 
 
+
+## Other
+
+* CS231n: Convolutional Neural Networks for Visual Recognition: http://cs231n.github.io/
+
+
 ## Games
 
 * General Game Playing course at Stanford: http://arrogant.stanford.edu/ggp/homepage/notes.php
 * Description of DeepBlue: http://stanford.edu/~cpiech/cs221/apps/deepBlue.html
-
-
 
