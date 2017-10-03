@@ -33,19 +33,18 @@ A large portion of new research is being produced by a handful of groups:
 
 ## Blog Posts
 
+* Andrej Karpathy "Pong From Pixels" http://karpathy.github.io/2016/05/31/rl/
 * Arthur Juliani, 8-Part Series on "Reinforcement Learning with Tensorflow": 
 	* [Part 0 — Q-Learning Agents](https://medium.com/@awjuliani/simple-reinforcement-learning-with-tensorflow-part-0-q-learning-with-tables-and-neural-networks-d195264329d0)
-	* Part 1 — Two-Armed Bandit
-	* Part 1.5 — Contextual Bandits
-	* Part 2 — Policy-Based Agents
-	* Part 3 — Model-Based RL
-	* Part 4 — Deep Q-Networks and Beyond
-	* Part 5 — Visualizing an Agent’s Thoughts and Actions
-	* Part 6 — Partial Observability and Deep Recurrent Q-Networks
-	* Part 7 — Action-Selection Strategies for Exploration
+	* [Part 1 — Two-Armed Bandit](https://medium.com/@awjuliani/super-simple-reinforcement-learning-tutorial-part-1-fd544fab149)
+	* [Part 1.5 — Contextual Bandits](https://medium.com/@awjuliani/simple-reinforcement-learning-with-tensorflow-part-1-5-contextual-bandits-bff01d1aad9c#.uzs1axw0s)
+	* [Part 2 — Policy-Based Agents](https://medium.com/@awjuliani/super-simple-reinforcement-learning-tutorial-part-2-ded33892c724)
+	* [Part 3 — Model-Based RL](https://medium.com/@awjuliani/simple-reinforcement-learning-with-tensorflow-part-3-model-based-rl-9a6fe0cce99)
+	* [Part 4 — Deep Q-Networks and Beyond](https://medium.com/@awjuliani/simple-reinforcement-learning-with-tensorflow-part-4-deep-q-networks-and-beyond-8438a3e2b8df#.i2zpbmre8)
+	* [Part 5 — Visualizing an Agent’s Thoughts and Actions](https://medium.com/@awjuliani/simple-reinforcement-learning-with-tensorflow-part-5-visualizing-an-agents-thoughts-and-actions-4f27b134bb2a)
+	* [Part 6 — Partial Observability and Deep Recurrent Q-Networks](https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-6-partial-observability-and-deep-recurrent-q-68463e9aeefc#.9djtshpqo)
+	* [Part 7 — Action-Selection Strategies for Exploration](https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-7-action-selection-strategies-for-exploration-d3a97b7cceaf#.qfg7lqxpr)
 	* [Part 8 — Asynchronous Actor-Critic Agents (A3C)](https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-8-asynchronous-actor-critic-agents-a3c-c88f72a5e9f2)
-
-* Andrej Karpathy "Pong From Pixels" http://karpathy.github.io/2016/05/31/rl/
 
 
 ## Tools
