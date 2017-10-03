@@ -12,6 +12,11 @@ This repository provides source code, links and other learning materials related
 * David Silver: http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html 
 
 
+## Resource
+
+* http://aikorea.org/awesome-rl/
+
+
 ## Source Code
 
 * https://deepmind.com/research/open-source/open-source-code/
@@ -19,20 +24,38 @@ This repository provides source code, links and other learning materials related
 
 ## Models
 
-### Neural Episodic Control
+### Asynchronous Advantage Actor-Critic (A3C)
+
+
+
+### Deep Q-Networks (DQN)
+
+
+* https://github.com/devsisters/DQN-tensorflow
+* https://github.com/tmulc18/TensorFlow-FlappyBird
+
+
+### Neural Episodic Control (2017)
 
 * https://github.com/ShibiHe/Model-Free-Episodic-Control
 
 
+## Other
 
-https://github.com/devsisters/DQN-tensorflow
-https://github.com/tmulc18/TensorFlow-FlappyBird
+### Evolutionary Strategies
+
+* https://github.com/alirezamika/bipedal-es
+
+
+## Games
+
+* http://stanford.edu/~cpiech/cs221/apps/deepBlue.html
+
+
+
 
 http://cs229.stanford.edu/proj2016/report/ChenYingLaird-DeepQLearningWithRecurrentNeuralNetwords-report.pdf
-https://github.com/alirezamika/bipedal-es
-
-http://aikorea.org/awesome-rl/
 
 
 
-http://stanford.edu/~cpiech/cs221/apps/deepBlue.html
+
