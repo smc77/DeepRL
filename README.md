@@ -19,7 +19,7 @@ Sutton and Barto provided the definitive textbook, and the most recent version i
 
 * David Silver (UCL) "Reinforcement Learning": http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html 
 * Sergey Levine, John Schulman, Chelsea Finn (Berkeley) "Deep Reinforcement Learning": http://rll.berkeley.edu/deeprlcoursesp17/ 
-* Katerina Fragkiadaki, Ruslan Satakhutdinov (CMU) "Deep Reinforcement Learning and Control": ttps://katefvision.github.io/
+* Katerina Fragkiadaki, Ruslan Satakhutdinov (CMU) "Deep Reinforcement Learning and Control": https://katefvision.github.io/
 
 ## Tutorials
 
@@ -35,22 +35,22 @@ Sutton and Barto provided the definitive textbook, and the most recent version i
 
 ## Tools
 
-* OpenAI: 
+* OpenAI: https://openai.com/systems/
 
 
-## Benchmarks
+## Benchmarks/Data
 
 * Deep Learning: http://deeplearning.net/datasets/
-* MNIST: 
+* MNIST: http://yann.lecun.com/exdb/mnist/
 * ImageNet: http://image-net.org/challenges/LSVRC/2017/
-* OpenAI gym: 
+* OpenAI gym: https://github.com/openai/gym
+* OpenAI universe: https://github.com/openai/universe
 
 
 
 ## RL Resources
 
-* http://aikorea.org/awesome-rl/
-
+* https://github.com/aikorea/awesome-rl
 
 
 
@@ -87,7 +87,7 @@ Sutton and Barto provided the definitive textbook, and the most recent version i
 
 ## Other
 
-* Visual: http://cs231n.github.io/
+* CS231n: Convolutional Neural Networks for Visual Recognition: http://cs231n.github.io/
 
 
 ### Evolutionary Strategies
