@@ -34,7 +34,7 @@ A large portion of new research is being produced by a handful of groups:
 ## Blog Posts
 
 * Arthur Juliani, 8-Part Series on "Reinforcement Learning with Tensorflow": 
-** https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-8-asynchronous-actor-critic-agents-a3c-c88f72a5e9f2
+  * https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-8-asynchronous-actor-critic-agents-a3c-c88f72a5e9f2
 
 * Andrej Karpathy "Pong From Pixels" http://karpathy.github.io/2016/05/31/rl/
 
