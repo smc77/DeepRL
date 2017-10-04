@@ -2,9 +2,9 @@
 
 These scripts provide examples of using OpenAI gym with reinforcement learning agents.
 
-```
-brew install tmux htop cmake golang libjpeg-turbo      # On Linux use sudo apt-get install -y tmux htop cmake golang libjpeg-dev
+I use Python 3.6.1 (Anaconda).
 
+```
 pip install "gym[atari]"
 pip install universe
 pip install six
