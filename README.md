@@ -1,6 +1,6 @@
-# DeepRL
+# AI and DeepRL
 
-This repository provides source code, links and other learning materials related to Deep Reinforcement Learning.
+This repository provides source code, links and other learning materials related to Artificial Intelligence, especially focused on Deep Reinforcement Learning.
 
 ## Texts
 
@@ -15,12 +15,13 @@ A large portion of new research is being produced by a handful of groups:
 * University of Alberta: http://spaces.facsci.ualberta.ca/rlai/
 * DeepMind: https://deepmind.com/
 * OpenAI: https://openai.com/
+* Berkeley: http://bair.berkeley.edu/
 
 
 ## Courses
 
 * David Silver (UCL) "Reinforcement Learning": http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html 
-* Sergey Levine, John Schulman, Chelsea Finn (Berkeley) "Deep Reinforcement Learning": http://rll.berkeley.edu/deeprlcoursesp17/ 
+* Sergey Levine, John Schulman, Chelsea Finn (Berkeley) "Deep Reinforcement Learning": http://rll.berkeley.edu/deeprlcoursesp17/ (also see: https://berkeley-deep-learning.github.io/)
 * Katerina Fragkiadaki, Ruslan Satakhutdinov (CMU) "Deep Reinforcement Learning and Control": https://katefvision.github.io/
 
 
@@ -29,6 +30,12 @@ A large portion of new research is being produced by a handful of groups:
 * David Silver, Deep Reinforcement Learning tutorial (ICML 2016): http://icml.cc/2016/tutorials/deep_rl_tutorial.pdf
 * John Shulman, Deep Reinforcement Learning tutorial (Deep Learning School 2016): https://www.youtube.com/watch?v=PtAIh9KSnjo
 * Pieter Abbeel, Deep Reinforcement Learning: https://simons.berkeley.edu/talks/pieter-abbeel-2017-3-28
+
+
+## General Discussion
+
+* Li (2017) "Deep Reinforcement Learning: An Overview" https://arxiv.org/abs/1701.07274
+* Arulkumaran (2017) "A Brief Survey of Deep Reinforcement Learning" https://arxiv.org/abs/1708.05866
 
 
 ## Blog Posts
@@ -92,6 +99,12 @@ OpenAI's "baselines" provides some nice implementations of different state-of-th
 
 
 
+### Trust Region Policy Optimization (2015)
+
+* Schulman et. al. (Berkeley) "Trust Region Policy Optimization" (2015) https://arxiv.org/abs/1502.05477
+
+
+
 ### Asynchronous Advantage Actor-Critic (A3C) (2016)
 
 * Paper: Mnih et. al. (DeepMind/Montreal) "Asynchronous Methods for Deep Reinforcement Learning" (2016) https://arxiv.org/abs/1602.01783
@@ -112,6 +125,7 @@ OpenAI's "baselines" provides some nice implementations of different state-of-th
 * OpenAI Blog Post: https://blog.openai.com/evolution-strategies/
 * https://github.com/openai/evolution-strategies-starter
 * https://github.com/alirezamika/bipedal-es
+
 
 
 ## Other
