@@ -83,8 +83,9 @@ OpenAI's "baselines" provides some nice implementations of different state-of-th
 * https://blog.openai.com/baselines-acktr-a2c/
 
 
-### Deep Q-Networks (DQN) (2013)
+### Deep Q-Networks (DQN) (2015)
 
+* Mnih et. al. (DeepMind) "Human-level control through deep reinforcement learning" (2015) http://www.nature.com/nature/journal/v518/n7540/full/nature14236.html
 * Source code from DeepMind: https://sites.google.com/a/deepmind.com/dqn/
 * https://github.com/devsisters/DQN-tensorflow
 * https://github.com/tmulc18/TensorFlow-FlappyBird
@@ -97,19 +98,20 @@ OpenAI's "baselines" provides some nice implementations of different state-of-th
 * A3C example from OpenAI: https://github.com/openai/universe-starter-agent
 
 
-
 ### Neural Episodic Control (2017)
 
+* Pritzel et. al. (DeepMind) "Neural Episodic Control" (2017) https://arxiv.org/abs/1703.01988
 * https://github.com/ShibiHe/Model-Free-Episodic-Control
 * https://github.com/mjacar/pytorch-nec
 * https://github.com/EndingCredits/Neural-Episodic-Control
 
 
-### Evolutionary Strategies
+### Evolutionary Strategies (2017)
 
+* Salimans et. al. (OpenAI) "Evolution Strategies as a Scalable Alternative to Reinforcement Learning" (2017) https://arxiv.org/abs/1703.03864
+* OpenAI Blog Post: https://blog.openai.com/evolution-strategies/
 * https://github.com/openai/evolution-strategies-starter
 * https://github.com/alirezamika/bipedal-es
-
 
 
 ## Other
